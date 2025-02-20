@@ -1,6 +1,6 @@
 import httpClient from "../httpClient";
 
-// Créer une carte
+// Créer une carte --> seul qui est bon pour l'instant
 export const createCard = async (name: string, idList: string, desc?: string) => {
   try {
     const response = await httpClient.post('/cards',{}, {
