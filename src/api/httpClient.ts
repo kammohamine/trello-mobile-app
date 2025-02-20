@@ -14,6 +14,8 @@ const httpClient = axios.create({
   },
 });
 
+export default httpClient;
+
 //intercepteur axios pour l'entête de la requête
 httpClient.interceptors.request.use(
     config => {
