@@ -14,3 +14,35 @@ export const createBoard = async (name: string) => {
     throw error;
   }
 };
+
+export const updateBoard = async (id: string, name: string) => {
+  try {
+    const response = await httpClient.put(`/boards/${id}`, {
+      name,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour du board:', error);
+    throw error;
+  }
+};
+
+export const deleteBoard = async (id: string) => {
+  try {
+    const response = await httpClient.delete(`/boards/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la suppression du board:', error);
+    throw error;
+  }
+};
+
+export const getBoard = async (id: string) => {
+  try {
+    const response = await httpClient.get(`/boards/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la récupération du board:', error);
+    throw error;
+  }
+};

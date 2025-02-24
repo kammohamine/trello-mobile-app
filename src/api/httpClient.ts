@@ -15,7 +15,7 @@ const httpClient = axios.create({
 });
 
 // Token d'authentification
-let authToken: string | null = null;
+let authToken: string | null = null; // permet de stocker le token d'authentification momentanément
 
 const updateToken = async () => {
   authToken = await getToken();
