@@ -1,5 +1,5 @@
 import httpClient from '../httpClient';
-import AsyncStorage from 'react-native';
+//import AsyncStorage from 'react-native'; //EncryptedStorage fonctionne bien seul
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { Linking } from 'react-native';
 

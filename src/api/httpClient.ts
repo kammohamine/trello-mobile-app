@@ -1,26 +1,28 @@
-import axios from "axios";
+import axios, { get } from "axios";
 import dotenv from "dotenv";
 dotenv.config();
+import { getToken } from './trello/auth'; 
 
 const TRELLO_API_KEY = process.env.TRELLO_API_KEY;
-const TRELLO_API_TOKEN = process.env.TRELLO_API_TOKEN;
+
 
 // Création d'une instance d'axios avec une configuration de base
-const httpClient = axios.create({
+const httpClient =  axios.create({
   baseURL: "https://api.trello.com/1",
   params: {
     key: TRELLO_API_KEY,
-    token: TRELLO_API_TOKEN,
   },
 });
 
-//intercepteur axios pour l'entête de la requête
+
+//intercepteur axios pour l'entête de la requête --> récupère ici le token de manière asynchrone
 httpClient.interceptors.request.use(
     config => {
+      const token = getToken();
       if (!config.headers) {
         config.headers = {};
       }
-      config.headers.Authorization = `Bearer ${TRELLO_API_TOKEN}`;
+      config.headers.Authorization= `Bearer ${token}`;
       console.log('Requête envoyée:', config);
       return config;
     },
