@@ -5,12 +5,17 @@ import httpClient from '../../api/httpClient';
 
 const BoardsScreen = () => {
   const { token } = useContext(AuthContext);
-  const [boards, setBoards] = useState([]);
+  interface Board {
+    id: string;
+    name: string;
+  }
+
+  const [boards, setBoards] = useState<Board[]>([]);
 
   useEffect(() => {
     const fetchBoards = async () => {
       try {
-        const response = await httpClient.get('/members/me/boards', {
+        const response = await httpClient.get<Board[]>('/members/me/boards', {
           params: {
             key: process.env.TRELLO_API_KEY,
             token: token,

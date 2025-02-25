@@ -2,7 +2,9 @@ import React, { useContext } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { AuthContext } from '../../context/AuthContext';
 
-const LoginScreen = ({ navigation }) => {
+import { NavigationProp } from '@react-navigation/native';
+
+const LoginScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
   const { login, token } = useContext(AuthContext);
 
   if (token) {
