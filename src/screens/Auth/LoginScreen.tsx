@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { AuthContext } from '../../context/AuthContext';
-
 import { NavigationProp } from '@react-navigation/native';
 
 const LoginScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {

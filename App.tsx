@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { AuthProvider, AuthContext } from './src/context/AuthContext';
+import { AuthProvider } from './src/context/AuthContext';
 import LoginScreen from './src/screens/Auth/LoginScreen';
 import BoardsScreen from './src/screens/Boards/BoardsScreen';
 

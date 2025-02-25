@@ -4,7 +4,10 @@ import { getToken } from './trello/auth'; // Importer la fonction getToken
 import constnants from "expo-constants";
 //dotenv.config();
 
-const TRELLO_API_KEY = constnants.extra.TRELLO_API_KEY;
+//const TRELLO_API_KEY = constnants.extra.TRELLO_API_KEY;
+
+const TRELLO_API_KEY = constnants.expoConfig?.extra?.TRELLO_API_KEY;
+console.log(TRELLO_API_KEY);
 
 // Création d'une instance unique d'axios avec une configuration de base
 const httpClient = axios.create({

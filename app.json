@@ -5,7 +5,8 @@
     "slug": "trello-mobile-app",
     "version": "1.0.0",
     "extra": {
-      "TRELLO_API_KEY" : "fee11716f571052896246bc74f1aaac7"
+      "TRELLO_API_KEY" : "fee11716f571052896246bc74f1aaac7",
+      "TRELLO_API_TOKEN": "ATTA7bdf37efec2104888f8cf0bdd7dacf8c6b005dca1db918abc0eda8d4ada30fcdDC714A44"
     },
     "orientation": "portrait",
     "icon": "./assets/icon.png",
