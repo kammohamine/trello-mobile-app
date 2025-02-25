@@ -4,8 +4,9 @@ import httpClient from '../httpClient';
 //import { Linking } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import * as Linking from 'expo-linking';
+import Constants from 'expo-constants';
 
-const TRELLO_API_KEY = process.env.TRELLO_API_KEY;
+const TRELLO_API_KEY = Constants.extra.TRELLO_API_KEY;
 const REDIRECT_URI = encodeURIComponent('myapp://auth'); // Remplacez par votre URI de redirection
 
 // Rediriger vers la page d'autorisation de Trello

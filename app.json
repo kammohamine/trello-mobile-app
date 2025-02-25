@@ -4,6 +4,9 @@
     "scheme": "trello-mobile-app",
     "slug": "trello-mobile-app",
     "version": "1.0.0",
+    "extra": {
+      "TRELLO_API_KEY" : "fee11716f571052896246bc74f1aaac7"
+    },
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
