@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { AuthContext } from '../../context/AuthContext';
 import httpClient from '../../api/httpClient';
+import { getBoards } from '../../api/trello/endpointsBoards';
 
 const BoardsScreen = () => {
   const { token } = useContext(AuthContext);
@@ -14,19 +15,13 @@ const BoardsScreen = () => {
 
   useEffect(() => {
     const fetchBoards = async () => {
-      try {
-        const response = await httpClient.get<Board[]>('/members/me/boards', {
-          params: {
-            key: process.env.TRELLO_API_KEY,
-            token: token,
-          },
-        });
-        setBoards(response.data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération des boards:', error);
-      }
+        try{
+      const boards = await getBoards(token) as Board[];
+      setBoards(boards);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des boards:', error);
+        }
     };
-
     if (token) {
       fetchBoards();
     }

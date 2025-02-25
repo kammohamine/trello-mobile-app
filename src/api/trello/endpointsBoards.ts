@@ -46,3 +46,19 @@ export const getBoard = async (id: string) => {
     throw error;
   }
 };
+
+//getBoards permet de récupérer les boards liées à un utilisateur
+
+export const getBoards = async (token: string | null) => {
+  try {
+    const response = await httpClient.get('/members/me/boards', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des boards:', error);
+    throw error;
+  }
+};
