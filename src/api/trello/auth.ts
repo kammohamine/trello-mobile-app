@@ -11,12 +11,12 @@ import Constants from 'expo-constants';
 const TRELLO_API_KEY = Constants.expoConfig?.extra?.TRELLO_API_KEY;
 console.log(TRELLO_API_KEY);
 
-const REDIRECT_URI = encodeURIComponent('myapp://auth'); // Remplacez par votre URI de redirection
+//const REDIRECT_URI = encodeURIComponent('myapp://auth'); // Remplacez par votre URI de redirection
 
 // Rediriger vers la page d'autorisation de Trello
 export const redirectToTrelloAuth = () => {
   const redirectUrl = Linking.createURL('auth'); // Génère automatiquement myapp://auth
-  const authUrl = `https://trello.com/1/authorize?expiration=1day&name=YourAppName&scope=read,write&response_type=token&key=${TRELLO_API_KEY}&redirect_uri=${redirectUrl}`;
+  const authUrl = `https://trello.com/1/authorize?expiration=1day&name=YourAppName&scope=read,write&response_type=token&key=${TRELLO_API_KEY}&redirect_url=${redirectUrl}`;
   Linking.openURL(authUrl);
 };
 
