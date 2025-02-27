@@ -30,7 +30,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const newToken = await handleAuthCallback(event.url);
       setToken(newToken);
     };
-
+    
     checkToken();
 
     const subscription = Linking.addEventListener('url', handleUrl);

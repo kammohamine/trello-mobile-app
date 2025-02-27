@@ -15,8 +15,8 @@ console.log(TRELLO_API_KEY);
 
 // Rediriger vers la page d'autorisation de Trello
 export const redirectToTrelloAuth = () => {
-  const redirectUrl = Linking.createURL('auth'); // Génère automatiquement myapp://auth
-  const authUrl = `https://trello.com/1/authorize?expiration=1day&name=YourAppName&scope=read,write&response_type=token&key=${TRELLO_API_KEY}&redirect_url=${redirectUrl}`;
+  const redirectUrl = encodeURIComponent( Linking.createURL('auth')); // Génère automatiquement myapp://auth
+  const authUrl = `https://trello.com/1/authorize?expiration=1day&name=trello-mobile-app&scope=read,write&response_type=token&key=${TRELLO_API_KEY}&return_url=${redirectUrl}`;
   Linking.openURL(authUrl);
 };
 
@@ -32,6 +32,7 @@ const extractTokenFromUrl = (url: string) => {
 
 // Gérer le callback et stocker le token
 export const handleAuthCallback = async (url: string) => {
+  console.log('URL de callback après identification:', url);
   const token = extractTokenFromUrl(url);
   if (token) {
     await SecureStore.setItemAsync('trello_access_token', token);
@@ -45,6 +46,7 @@ export const handleAuthCallback = async (url: string) => {
 export const getToken = async () => {
   try {
     const token = await SecureStore.getItemAsync('token');
+    console.log('Token enregistré:', token);
     return token;
   } catch (error) {
     console.error('Erreur lors de la récupération du token:', error);
