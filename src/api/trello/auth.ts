@@ -15,8 +15,8 @@ console.log(TRELLO_API_KEY);
 
 // Rediriger vers la page d'autorisation de Trello
 export const redirectToTrelloAuth = () => {
-  const redirectUrl = encodeURIComponent( Linking.createURL('auth')); // Génère automatiquement myapp://auth
-  const authUrl = `https://trello.com/1/authorize?expiration=1day&name=trello-mobile-app&scope=read,write&response_type=token&key=${TRELLO_API_KEY}&return_url=${redirectUrl}`;
+  const redirectUrl = encodeURIComponent(Linking.createURL('auth')); // Génère automatiquement myapp://auth
+  const authUrl = `https://trello.com/1/authorize?expiration=1day&name=trello-mobile-app&scope=read,write&response_type=token&key=${TRELLO_API_KEY}&redirect_url=${redirectUrl}`;
   Linking.openURL(authUrl);
 };
 
