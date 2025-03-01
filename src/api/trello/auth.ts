@@ -12,12 +12,16 @@ const TRELLO_API_KEY = Constants.expoConfig?.extra?.TRELLO_API_KEY;
 console.log(TRELLO_API_KEY);
 
 //const REDIRECT_URI = encodeURIComponent('myapp://auth'); // Remplacez par votre URI de redirection
+//const authUrl = `https://trello.com/1/authorize?expiration=1day&name=trello-mobile-app&scope=read,write&response_type=token&key=${TRELLO_API_KEY}&return_url=${REDIRECT_URI}&callback_method=fragment`;
 
 // Rediriger vers la page d'autorisation de Trello
 export const redirectToTrelloAuth = () => {
-  const redirectUrl = encodeURIComponent(Linking.createURL('auth')); // Génère automatiquement myapp://auth
-  const authUrl = `https://trello.com/1/authorize?expiration=1day&name=trello-mobile-app&scope=read,write&response_type=token&key=${TRELLO_API_KEY}&redirect_url=${redirectUrl}`;
-  Linking.openURL(authUrl);
+const redirectUrl = encodeURIComponent(Linking.createURL('trello-mobile-app://auth')); // Génère automatiquement trello-mobile-app://auth
+console.log('URL de redirection:', redirectUrl);
+
+const authUrl = `https://trello.com/1/authorize?expiration=1day&name=trello-mobile-app&scope=read,write&response_type=token&key=${TRELLO_API_KEY}&redirect_url=${redirectUrl}&callback_method=fragment`;
+
+Linking.openURL(authUrl);
 };
 
 
