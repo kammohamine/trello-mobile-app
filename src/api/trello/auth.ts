@@ -19,7 +19,7 @@ export const redirectToTrelloAuth = () => {
 const redirectUrl = encodeURIComponent(Linking.createURL('trello-mobile-app://auth')); // Génère automatiquement trello-mobile-app://auth
 console.log('URL de redirection:', redirectUrl);
 
-const authUrl = `https://trello.com/1/authorize?expiration=1day&name=trello-mobile-app&scope=read,write&response_type=token&key=${TRELLO_API_KEY}&redirect_url=${redirectUrl}&callback_method=fragment`;
+const authUrl = `https://trello.com/1/authorize?expiration=1day&name=trello-mobile-app&scope=read,write&response_type=token&key=${TRELLO_API_KEY}&return_url=${redirectUrl}&callback_method=fragment`;
 
 Linking.openURL(authUrl);
 };
@@ -49,7 +49,7 @@ export const handleAuthCallback = async (url: string) => {
 // Récupérer le token utilisateur
 export const getToken = async () => {
   try {
-    const token = await SecureStore.getItemAsync('token');
+    const token = await SecureStore.getItemAsync('trello_access_token');
     console.log('Token enregistré:', token);
     return token;
   } catch (error) {

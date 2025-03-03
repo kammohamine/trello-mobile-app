@@ -34,7 +34,8 @@ httpClient.interceptors.request.use(
       config.headers = {};
     }
     if (authToken) {
-      config.headers.Authorization = `Bearer ${authToken}`;
+      // format spécifique à Trello.
+      config.headers.Authorization = `OAuth oauth_token= "${authToken}"`;
     }
     console.log("Requête envoyée:", config);
     return config;
