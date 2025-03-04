@@ -20,21 +20,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     const checkToken = async () => {
+
       const storedToken = await SecureStore.getItemAsync('trello_access_token');
       if (storedToken) {
         setToken(storedToken);
       }
     };
-
     const handleUrl = async (event: { url: string }) => {
       const newToken = await handleAuthCallback(event.url);
       setToken(newToken);
     };
-    
     checkToken();
-
+    const getInitialUrl = async () => {
+      const initialUrl = await Linking.getInitialURL();
+      if (initialUrl) handleUrl({ url: initialUrl });
+    };
+    getInitialUrl();
     const subscription = Linking.addEventListener('url', handleUrl);
-
     return () => {
       subscription.remove();
     };

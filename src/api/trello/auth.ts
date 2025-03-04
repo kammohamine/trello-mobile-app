@@ -15,20 +15,27 @@ console.log(TRELLO_API_KEY);
 
 // Rediriger vers la page d'autorisation de Trello
 export const redirectToTrelloAuth = () => {
-const redirectUrl = Linking.createURL('trello-mobile-app://auth'); // Génère automatiquement trello-mobile-app://auth
-console.log('URL de redirection:', redirectUrl);
+  const redirectUri = Linking.createURL('trello-mobile-app://auth');
+  console.log('URL de redirection:', redirectUri);
 
-const authUrl = `https://trello.com/1/authorize?expiration=1day&name=trello-mobile-app&scope=read,write&response_type=token&key=${TRELLO_API_KEY}&redirect_url=${redirectUrl}`;
-console.log("URL de redirection généré: ", authUrl);
-Linking.openURL(authUrl);
+  // Correction des paramètres selon la doc Trello
+  const authUrl = `https://trello.com/1/authorize?` +
+    `expiration=1day&` +
+    `scope=read,write&` +
+    `response_type=token&` +
+    `key=${TRELLO_API_KEY}&` +
+    `callback_method=fragment&` + 
+    `return_url=${encodeURIComponent(redirectUri)}`;
+
+  console.log("URL d'autorisation générée: ", authUrl);
+  Linking.openURL(authUrl);
 };
 
 
 // Extraire le token de l'URL de callback
 const extractTokenFromUrl = (url: string) => {
-  const error = url.match(/[?&#]error=([^&]+)/);
-  if (error) throw new Error(`Trello error: ${error[1]}`);
-
+  const error = url.match(/[?#&]error=([^&]+)/);
+    if (error) throw new Error(`Trello error: ${error[1]}`);
   const match = url.match(/#token=([a-zA-Z0-9]+)/);
   return match ? match[1] : null;
 };
@@ -63,11 +70,7 @@ export const verifyToken = async () => {
     const token = await getToken();
     if (!token) throw new Error('Token non disponible');
 
-    const response = await httpClient.get('/members/me', {
-      headers: {
-        Authorization: `OAuth oauth_consumer_key="${TRELLO_API_KEY}", oauth_token="${token}"`
-      }
-    });
+    const response = await httpClient.get(`/members/me?key=${TRELLO_API_KEY}&token=${token}`);
     
     return response.data;
   } catch (error) {
